@@ -2,7 +2,8 @@
 """
 Generator of "nothing-up-my-sleeve" (NUMS) constants.
 
-This aims to demonstrate that NUMS-looking shouldn't be blindly trusted.
+This aims to demonstrate that NUMS-looking constants shouldn't be
+blindly trusted.
 
 This program may be used to bruteforce the design of a malicious cipher,
 to create somewhat rigid curves, etc.  As it is, it generates over

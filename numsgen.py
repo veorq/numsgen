@@ -6,7 +6,7 @@ This aims to demonstrate that NUMS-looking constants shouldn't be
 blindly trusted.
 
 This program may be used to bruteforce the design of a malicious cipher,
-to create somewhat rigid curves, etc.  As it is, it generates over
+to create somewhat rigid curves, etc.  As it is, it generates about 
 500,000 constants, and is easily tweaked to generate many more.
 
 The code below is pretty much self-explanatory. Please report bugs.
@@ -28,8 +28,8 @@ import sys
 PRIMES = (2, 3, 5, 7, 11, 13)
 
 PRECISIONS = (
-    10, 42, 50, 100, 200, 500, 1000,
-    8, 16, 32, 64, 128, 256, 512, 1024,
+    42, 50, 100, 200, 500, 1000,
+    16, 32, 64, 128, 256, 512, 1024,
 )
 
 # set mpmath precision

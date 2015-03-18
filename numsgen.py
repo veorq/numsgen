@@ -153,11 +153,12 @@ MAXNUMS = \
 def main():
     try:
         nbnums = int(sys.argv[1])
+        if nbnums > MAXNUMS:
+            raise ValueError 
     except:
         print 'expected argument < %d (~2^%.2f)'\
             % (MAXNUMS, mp.log(MAXNUMS, 2))
         return -1
-
     count = 0
 
     for seed, encoding, hashing, decoding in\

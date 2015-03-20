@@ -6,7 +6,7 @@ This aims to demonstrate that NUMS-looking constants shouldn't be
 blindly trusted.
 
 This program may be used to bruteforce the design of a malicious cipher,
-to create somewhat rigid curves, etc.  As it is, it generates about 
+to create somewhat rigid curves, etc.  As it is, it generates about
 500,000 constants, and is easily tweaked to generate many more.
 
 The code below is pretty much self-explanatory. Please report bugs.
@@ -143,8 +143,8 @@ DECODINGS = (
 )
 
 
-MAXNUMS = \
-    len(SEEDS) * \
+MAXNUMS =\
+    len(SEEDS) *\
     len(ENCODINGS) *\
     len(HASHINGS) *\
     len(DECODINGS)
@@ -154,7 +154,7 @@ def main():
     try:
         nbnums = int(sys.argv[1])
         if nbnums > MAXNUMS:
-            raise ValueError 
+            raise ValueError
     except:
         print 'expected argument < %d (~2^%.2f)'\
             % (MAXNUMS, mp.log(MAXNUMS, 2))

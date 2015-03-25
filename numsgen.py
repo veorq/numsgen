@@ -53,6 +53,8 @@ IRRATIONALS = (
     mp.nstr(mp.phi, mp.mp.dps).replace('.', ''),
     mp.nstr(mp.pi, mp.mp.dps).replace('.', ''),
     mp.nstr(mp.e, mp.mp.dps).replace('.', ''),
+    mp.nstr(mp.euler, mp.mp.dps).replace('.', ''),
+    mp.nstr(mp.zeta(3), mp.mp.dps).replace('.', ''),
 )
 
 for irrational in IRRATIONALS:
@@ -149,6 +151,8 @@ MAXNUMS =\
     len(HASHINGS) *\
     len(DECODINGS)
 
+print len(SEEDS)
+print len(HASHINGS)
 
 def main():
     try:

@@ -6,8 +6,8 @@ This aims to demonstrate that NUMS-looking constants shouldn't be
 blindly trusted.
 
 This program may be used to bruteforce the design of a malicious cipher,
-to create somewhat rigid curves, etc.  As it is, it generates about
-500,000 constants, and is easily tweaked to generate many more.
+to create somewhat rigid curves, etc.  As it is, it generates more than
+1 million constants, and is easily tweaked to generate many more.
 
 The code below is pretty much self-explanatory. Please report bugs.
 

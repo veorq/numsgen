@@ -16,6 +16,8 @@ Under CC0 license <http://creativecommons.org/publicdomain/zero/1.0/>
 """
 
 from base64 import b64encode
+from binascii import unhexlify
+from blake2 import blake2b, blake2s
 from itertools import product
 from struct import unpack
 from Crypto.Hash import HMAC, MD5, SHA, SHA256, SHA512
@@ -112,6 +114,12 @@ ENCODINGS = (
 )
 
 
+def do_blake2b(x):
+    return unhexlify(blake2s(x))
+
+def do_blake2s(x):
+    return unhexlify(blake2s(x))
+
 def do_hash(x, ahash):
     h = ahash.new()
     h.update(x)
@@ -125,8 +133,12 @@ def do_hmac(x, key, ahash):
 HASHINGS = [
     lambda x: do_hash(x, MD5),
     lambda x: do_hash(x, SHA),
+    lambda x: do_hash(x, SHA224),
     lambda x: do_hash(x, SHA256),
+    lambda x: do_hash(x, SHA384),
     lambda x: do_hash(x, SHA512),
+    lambda x: do_blake2b(x),
+    lambda x: do_blake2s(x),
 ]
 
 # HMACs

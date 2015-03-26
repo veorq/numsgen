@@ -53,6 +53,7 @@ for prime in PRIMES:
         seed2 = mp.nstr(inv, mp.mp.dps).replace('.', '')
         for precision in PRECISIONS:
             SEEDS.append(seed1[:precision])
+            SEEDS.append(seed2[:precision])
         if num < 1:
             continue
         seed3 = mp.nstr(num, mp.mp.dps).split('.')[1]
@@ -107,7 +108,7 @@ def base64_from_int(x):
     return b64encode(x)
 
 def base64_from_raw(x):
-    return b64encode(hex_raw(x))
+    return b64encode(raw(x))
 
 ENCODINGS = (
     int10,

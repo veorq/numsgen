@@ -33,7 +33,7 @@ PRECISIONS = (
 )
 
 # set mpmath precision
-mp.mp.dps = max(PRECISIONS)
+mp.mp.dps = max(PRECISIONS)+2
 
 # some popular to-irrational transforms (beware exceptions)
 TRANSFORMS = (
@@ -45,9 +45,16 @@ TRANSFORMS = (
 SEEDS = []
 for prime in PRIMES:
     for transform in TRANSFORMS:
-        seed = mp.nstr(abs(transform(prime)), mp.mp.dps).replace('.', '')
+        num = abs(transform(prime))
+        seed1 = mp.nstr(num, mp.mp.dps).replace('.', '')
         for precision in PRECISIONS:
-            SEEDS.append(seed[:precision])
+            SEEDS.append(seed1[:precision])
+        if num < 1:
+            continue
+        seed2 = mp.nstr(num, mp.mp.dps).split('.')[1]
+        for precision in PRECISIONS:
+            SEEDS.append(seed2[:precision])
+            
 
 IRRATIONALS = (
     mp.nstr(mp.phi, mp.mp.dps).replace('.', ''),
@@ -65,6 +72,12 @@ for irrational in IRRATIONALS:
 # some common encodings
 def int10_ascii(x):
     return x
+
+def int2_ascii(x):
+    return bin(int(x))
+
+def int2_ascii_noprefix(x):
+    return bin(int(x))[2:]
 
 def hex_ascii_lo(x):
     xhex = '%x' % int(x)
@@ -89,6 +102,8 @@ def base64_from_raw(x):
 
 ENCODINGS = (
     int10_ascii,
+    int2_ascii,
+    int2_ascii_noprefix,
     hex_ascii_lo,
     hex_ascii_hi,
     hex_raw,

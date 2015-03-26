@@ -20,7 +20,7 @@ from binascii import unhexlify
 from blake2 import blake2b, blake2s
 from itertools import product
 from struct import unpack
-from Crypto.Hash import HMAC, MD5, SHA, SHA256, SHA512
+from Crypto.Hash import HMAC, MD5, SHA, SHA224, SHA256, SHA384, SHA512
 from Crypto.Protocol.KDF import PBKDF2
 import mpmath as mp
 import sys
@@ -48,14 +48,21 @@ SEEDS = []
 for prime in PRIMES:
     for transform in TRANSFORMS:
         num = abs(transform(prime))
+        inv = 1/num
         seed1 = mp.nstr(num, mp.mp.dps).replace('.', '')
+        seed2 = mp.nstr(inv, mp.mp.dps).replace('.', '')
         for precision in PRECISIONS:
             SEEDS.append(seed1[:precision])
         if num < 1:
             continue
-        seed2 = mp.nstr(num, mp.mp.dps).split('.')[1]
+        seed3 = mp.nstr(num, mp.mp.dps).split('.')[1]
         for precision in PRECISIONS:
-            SEEDS.append(seed2[:precision])
+            SEEDS.append(seed3[:precision])
+        if inv < 1:
+            continue
+        seed4 = mp.nstr(inv, mp.mp.dps).split('.')[1]
+        for precision in PRECISIONS:
+            SEEDS.append(seed4[:precision])
             
 
 IRRATIONALS = (
@@ -94,7 +101,7 @@ def hex_hi(x):
     return xhex
 
 def raw(x):
-    return hex_ascii_lo(x).decode('hex')
+    return hex_lo(x).decode('hex')
 
 def base64_from_int(x):
     return b64encode(x)

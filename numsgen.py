@@ -30,7 +30,7 @@ PRIMES = (2, 3, 5, 7, 11, 13)
 
 PRECISIONS = (
     42, 50, 100, 200, 500, 1000,
-    16, 32, 64, 128, 256, 512, 1024,
+    32, 64, 128, 256, 512, 1024,
 )
 
 # set mpmath precision
@@ -70,7 +70,8 @@ IRRATIONALS = (
     mp.nstr(mp.pi, mp.mp.dps).replace('.', ''),
     mp.nstr(mp.e, mp.mp.dps).replace('.', ''),
     mp.nstr(mp.euler, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.zeta(3), mp.mp.dps).replace('.', ''),
+    mp.nstr(mp.apery, mp.mp.dps).replace('.', ''),
+    mp.nstr(mp.log(mp.pi), mp.mp.dps).replace('.', ''),
 )
 
 for irrational in IRRATIONALS:

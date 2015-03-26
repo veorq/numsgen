@@ -6,8 +6,8 @@ This aims to demonstrate that NUMS-looking constants shouldn't be
 blindly trusted.
 
 This program may be used to bruteforce the design of a malicious cipher,
-to create somewhat rigid curves, etc.  As it is, it generates more than
-1 million constants, and is easily tweaked to generate many more.
+to create somewhat rigid curves, etc. It generates close to 2 million
+constants, and is easily tweaked to generate many more.
 
 The code below is pretty much self-explanatory. Please report bugs.
 
@@ -43,41 +43,36 @@ TRANSFORMS = (
     mp.cos, mp.sin, mp.tan,
 )
 
+
+IRRATIONALS = [
+    mp.phi,
+    mp.pi,
+    mp.e,
+    mp.euler,
+    mp.apery,
+    mp.log(mp.pi),
+] +\
+[ abs(transform(prime))\
+        for (prime, transform) in product(PRIMES, TRANSFORMS) ]
+
 SEEDS = []
-for prime in PRIMES:
-    for transform in TRANSFORMS:
-        num = abs(transform(prime))
-        inv = 1/num
-        seed1 = mp.nstr(num, mp.mp.dps).replace('.', '')
-        seed2 = mp.nstr(inv, mp.mp.dps).replace('.', '')
-        for precision in PRECISIONS:
-            SEEDS.append(seed1[:precision])
-            SEEDS.append(seed2[:precision])
-        if num < 1:
-            continue
+for num in IRRATIONALS:
+    inv = 1/num
+    seed1 = mp.nstr(num, mp.mp.dps).replace('.', '')
+    seed2 = mp.nstr(inv, mp.mp.dps).replace('.', '')
+    for precision in PRECISIONS:
+        SEEDS.append(seed1[:precision])
+        SEEDS.append(seed2[:precision])
+    if num >= 1:
         seed3 = mp.nstr(num, mp.mp.dps).split('.')[1]
         for precision in PRECISIONS:
             SEEDS.append(seed3[:precision])
-        if inv < 1:
-            continue
+        continue
+    if inv >= 1:
         seed4 = mp.nstr(inv, mp.mp.dps).split('.')[1]
         for precision in PRECISIONS:
             SEEDS.append(seed4[:precision])
             
-
-IRRATIONALS = (
-    mp.nstr(mp.phi, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.pi, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.e, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.euler, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.apery, mp.mp.dps).replace('.', ''),
-    mp.nstr(mp.log(mp.pi), mp.mp.dps).replace('.', ''),
-)
-
-for irrational in IRRATIONALS:
-    for precision in PRECISIONS:
-        SEEDS.append(irrational[:precision])
-
 
 # some common encodings
 def int10(x):

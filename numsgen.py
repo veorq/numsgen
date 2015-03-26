@@ -70,28 +70,28 @@ for irrational in IRRATIONALS:
 
 
 # some common encodings
-def int10_ascii(x):
+def int10(x):
     return x
 
-def int2_ascii(x):
+def int2(x):
     return bin(int(x))
 
-def int2_ascii_noprefix(x):
+def int2_noprefix(x):
     return bin(int(x))[2:]
 
-def hex_ascii_lo(x):
+def hex_lo(x):
     xhex = '%x' % int(x)
     if len(xhex) % 2:
         xhex = '0' + xhex
     return xhex
 
-def hex_ascii_hi(x):
+def hex_hi(x):
     xhex = '%X' % int(x)
     if len(xhex) % 2:
         xhex = '0' + xhex
     return xhex
 
-def hex_raw(x):
+def raw(x):
     return hex_ascii_lo(x).decode('hex')
 
 def base64_from_int(x):
@@ -101,12 +101,12 @@ def base64_from_raw(x):
     return b64encode(hex_raw(x))
 
 ENCODINGS = (
-    int10_ascii,
-    int2_ascii,
-    int2_ascii_noprefix,
-    hex_ascii_lo,
-    hex_ascii_hi,
-    hex_raw,
+    int10,
+    int2,
+    int2_noprefix,
+    hex_lo,
+    hex_hi,
+    raw,
     base64_from_int,
     base64_from_raw,
 )
@@ -166,8 +166,6 @@ MAXNUMS =\
     len(HASHINGS) *\
     len(DECODINGS)
 
-print len(SEEDS)
-print len(HASHINGS)
 
 def main():
     try:

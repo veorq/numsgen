@@ -11,6 +11,8 @@ constants, and is easily tweaked to generate many more.
 
 The code below is pretty much self-explanatory. Please report bugs.
 
+See also <http://safecurves.cr.yp.to/bada55.html>
+
 Copyright (c) 2015 Jean-Philippe Aumasson <jeanphilippe.aumasson@gmail.com>
 Under CC0 license <http://creativecommons.org/publicdomain/zero/1.0/>
 """
